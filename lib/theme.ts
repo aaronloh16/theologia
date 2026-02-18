@@ -33,7 +33,19 @@ export const colors = {
   },
 } as const;
 
-export type ThemeColors = typeof colors.dark;
+export type ThemeColors = {
+  background: string;
+  surface: string;
+  primaryText: string;
+  secondaryText: string;
+  accent: string;
+  mutedAccent: string;
+  divider: string;
+  quizCorrect: string;
+  quizIncorrect: string;
+  heartFilled: string;
+  heartOutline: string;
+};
 
 export const typography = {
   termHeadingFeed: {
