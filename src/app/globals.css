@@ -1,0 +1,269 @@
+@import "tailwindcss";
+
+/* ─── Dark mode via .dark class on <html> ─────────────────────────────────── */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ─── Design tokens ───────────────────────────────────────────────────────── */
+@theme {
+  /* Fonts */
+  --font-serif: var(--font-garamond), "Georgia", "Times New Roman", serif;
+  --font-sans: var(--font-inter), system-ui, -apple-system, sans-serif;
+
+  /* Light palette — warm parchment */
+  --color-bg:        #F8F5EE;
+  --color-surface:   #FDFAF5;
+  --color-ink:       #1E1B14;
+  --color-ink-muted: #6B5C48;
+  --color-ink-faint: #A8998A;
+  --color-gold:      #8C6D2F;
+  --color-gold-soft: #B8921E;
+  --color-border:    #E0D4C0;
+  --color-border-soft: #EDE6D6;
+  --color-highlight: #FDF4E0;
+  --color-highlight-border: #D4A84B;
+
+  /* Shadows */
+  --shadow-card: 0 1px 3px rgba(30, 27, 20, 0.06), 0 1px 2px rgba(30, 27, 20, 0.04);
+  --shadow-card-hover: 0 4px 16px rgba(30, 27, 20, 0.10), 0 2px 4px rgba(30, 27, 20, 0.06);
+  --shadow-dropdown: 0 8px 32px rgba(30, 27, 20, 0.12), 0 2px 8px rgba(30, 27, 20, 0.08);
+}
+
+/* ─── Dark mode overrides ─────────────────────────────────────────────────── */
+.dark {
+  --color-bg:        #131108;
+  --color-surface:   #1B1910;
+  --color-ink:       #EDE9DC;
+  --color-ink-muted: #A89A80;
+  --color-ink-faint: #655C48;
+  --color-gold:      #C8A050;
+  --color-gold-soft: #E0B860;
+  --color-border:    #2E2A1E;
+  --color-border-soft: #252115;
+  --color-highlight: #1E1A0C;
+  --color-highlight-border: #8C6D2F;
+
+  --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.25), 0 1px 2px rgba(0, 0, 0, 0.15);
+  --shadow-card-hover: 0 4px 16px rgba(0, 0, 0, 0.35), 0 2px 4px rgba(0, 0, 0, 0.20);
+  --shadow-dropdown: 0 8px 32px rgba(0, 0, 0, 0.40), 0 2px 8px rgba(0, 0, 0, 0.25);
+}
+
+/* ─── Base styles ─────────────────────────────────────────────────────────── */
+@layer base {
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    background-color: var(--color-bg);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-ink);
+    min-height: 100vh;
+  }
+
+  ::selection {
+    background-color: var(--color-gold);
+    color: var(--color-surface);
+  }
+
+  /* Scrollbar (webkit) */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--color-bg);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-border);
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-ink-faint);
+  }
+
+  /* Focus ring */
+  :focus-visible {
+    outline: 2px solid var(--color-gold);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+}
+
+/* ─── Reusable hover / interactive classes ────────────────────────────────── */
+@layer components {
+  /* Alphabet letter button on home page */
+  .letter-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 2.25rem;
+    width: 2.25rem;
+    border-radius: 0.375rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    border: 1px solid var(--color-border);
+    color: var(--color-ink-muted);
+    background: transparent;
+    transition: color 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+  }
+  .letter-btn:hover {
+    color: var(--color-surface);
+    background: var(--color-gold);
+    border-color: var(--color-gold);
+  }
+
+  /* Nav pill link */
+  .nav-pill {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.375rem 0.75rem;
+    border-radius: 0.375rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--color-ink-muted);
+    background: transparent;
+    transition: color 0.15s ease, background 0.15s ease;
+  }
+  .nav-pill:hover {
+    color: var(--color-ink);
+    background: var(--color-border-soft);
+  }
+
+  /* Ghost button */
+  .btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    padding: 0.375rem 0.75rem;
+    border-radius: 0.375rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    border: 1px solid var(--color-border);
+    color: var(--color-ink-muted);
+    background: transparent;
+    transition: color 0.15s ease, border-color 0.15s ease;
+  }
+  .btn-ghost:hover {
+    color: var(--color-ink);
+    border-color: var(--color-ink-muted);
+  }
+
+  /* Feature card link */
+  .feature-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    border-radius: 0.75rem;
+    border: 1px solid var(--color-border);
+    padding: 1.25rem;
+    background: var(--color-surface);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+  .feature-card:hover {
+    border-color: var(--color-gold);
+    box-shadow: var(--shadow-card-hover);
+  }
+
+  /* Term card link */
+  .term-card-link {
+    display: flex;
+    gap: 1rem;
+    border-radius: 0.75rem;
+    border: 1px solid var(--color-border);
+    padding: 1rem 1.25rem;
+    background: var(--color-surface);
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  }
+  .term-card-link:hover {
+    border-color: var(--color-ink-faint);
+    box-shadow: var(--shadow-card);
+  }
+
+  /* See-also pill */
+  .see-also-pill {
+    border-radius: 9999px;
+    padding: 0.25rem 0.75rem;
+    font-size: 0.875rem;
+    font-style: italic;
+    border: 1px solid var(--color-border);
+    color: var(--color-ink-muted);
+    background: var(--color-surface);
+    transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+  }
+  .see-also-pill:hover {
+    color: var(--color-gold);
+    border-color: var(--color-gold);
+    background: var(--color-highlight);
+  }
+
+  /* Prev/next card */
+  .nav-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    border-radius: 0.5rem;
+    border: 1px solid var(--color-border);
+    padding: 1rem;
+    background: var(--color-surface);
+    transition: border-color 0.15s ease;
+  }
+  .nav-card:hover {
+    border-color: var(--color-ink-faint);
+  }
+}
+
+/* ─── Utility classes ─────────────────────────────────────────────────────── */
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* Animated underline for links */
+  .link-gold {
+    color: var(--color-gold);
+    text-decoration: none;
+    background-image: linear-gradient(currentColor, currentColor);
+    background-size: 0% 1px;
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    transition: background-size 0.2s ease, color 0.15s ease;
+  }
+  .link-gold:hover {
+    color: var(--color-gold-soft);
+    background-size: 100% 1px;
+  }
+
+  /* Inline *term reference links in definitions */
+  .def-link {
+    color: var(--color-gold);
+    text-decoration: underline;
+    text-decoration-style: dotted;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 2px;
+    transition: color 0.15s ease, text-decoration-color 0.15s ease;
+  }
+  .def-link:hover {
+    color: var(--color-gold-soft);
+    text-decoration-style: solid;
+  }
+
+  /* Glass-morphism card surface */
+  .card-surface {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    box-shadow: var(--shadow-card);
+    transition: box-shadow 0.2s ease, border-color 0.2s ease;
+  }
+  .card-surface:hover {
+    box-shadow: var(--shadow-card-hover);
+    border-color: var(--color-ink-faint);
+  }
+}

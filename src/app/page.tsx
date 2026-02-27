@@ -1,0 +1,152 @@
+import Link from "next/link";
+import { getAllTerms, getLetters } from "@/lib/terms";
+import { SearchBar } from "@/components/SearchBar";
+
+export default function HomePage() {
+  const terms = getAllTerms();
+  const letters = getLetters();
+
+  const featured = [
+    terms.find((t) => t.id === "grace-common-efficacious-prevenient"),
+    terms.find((t) => t.id === "incarnation"),
+    terms.find((t) => t.id === "eschaton-eschatology"),
+  ].filter(Boolean) as (typeof terms)[0][];
+
+  return (
+    <div>
+      {/* ── Hero ───────────────────────────────────────────────────── */}
+      <section
+        className="flex flex-col items-center justify-center px-4 pb-20 pt-24 sm:pt-32 text-center"
+        style={{ background: "var(--color-bg)" }}
+      >
+        <div className="mb-10 h-px w-16" style={{ background: "var(--color-gold)", opacity: 0.45 }} />
+
+        <p
+          className="mb-3 text-[10px] font-medium uppercase tracking-[0.24em]"
+          style={{ fontFamily: "var(--font-sans)", color: "var(--color-ink-faint)" }}
+        >
+          A pocket dictionary
+        </p>
+
+        <h1
+          className="mb-4 font-light leading-none uppercase"
+          style={{
+            fontFamily: "var(--font-sans)",
+            color: "var(--color-ink)",
+            fontSize: "clamp(3rem, 10vw, 5.5rem)",
+            letterSpacing: "0.13em",
+          }}
+        >
+          Theologia
+        </h1>
+
+        <p
+          className="mb-1 text-xl sm:text-2xl"
+          style={{
+            fontFamily: "var(--font-serif)",
+            color: "var(--color-ink-muted)",
+            fontWeight: 400,
+            fontStyle: "italic",
+          }}
+        >
+          of theological terms
+        </p>
+
+        <p
+          className="mt-3 mb-10 text-xs"
+          style={{ fontFamily: "var(--font-sans)", color: "var(--color-ink-faint)", letterSpacing: "0.04em" }}
+        >
+          {terms.length} entries · Grenz, Guretzki &amp; Nordling
+        </p>
+
+        <div className="w-full max-w-lg">
+          <SearchBar terms={terms} placeholder="Search theological terms…" />
+        </div>
+
+        <div className="mt-6 flex items-center gap-5">
+          <Link
+            href="/terms"
+            className="text-sm font-medium link-gold"
+            style={{ fontFamily: "var(--font-sans)" }}
+          >
+            Browse A–Z →
+          </Link>
+          <span style={{ color: "var(--color-border)" }}>·</span>
+          <Link
+            href="/random"
+            className="text-sm transition-colors duration-150"
+            style={{ fontFamily: "var(--font-sans)", color: "var(--color-ink-muted)" }}
+          >
+            Random term
+          </Link>
+        </div>
+
+        <div className="mt-16 h-px w-16" style={{ background: "var(--color-gold)", opacity: 0.45 }} />
+      </section>
+
+      {/* ── Alphabet Nav ───────────────────────────────────────────── */}
+      <section
+        className="border-y py-7 px-4"
+        style={{ borderColor: "var(--color-border)", background: "var(--color-surface)" }}
+      >
+        <div className="mx-auto max-w-3xl">
+          <p
+            className="mb-4 text-center text-[10px] font-medium uppercase tracking-[0.2em]"
+            style={{ fontFamily: "var(--font-sans)", color: "var(--color-ink-faint)" }}
+          >
+            Browse by letter
+          </p>
+          <div className="flex flex-wrap justify-center gap-1.5">
+            {letters.map((letter) => (
+              <Link key={letter} href={`/terms#${letter}`} className="letter-btn" style={{ fontFamily: "var(--font-sans)" }}>
+                {letter}
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Featured terms ─────────────────────────────────────────── */}
+      {featured.length > 0 && (
+        <section className="mx-auto max-w-4xl px-4 py-16 sm:px-6">
+          <p
+            className="mb-8 text-center text-[10px] font-medium uppercase tracking-[0.2em]"
+            style={{ fontFamily: "var(--font-sans)", color: "var(--color-ink-faint)" }}
+          >
+            Selected terms
+          </p>
+          <div className="grid gap-4 sm:grid-cols-3">
+            {featured.map((term) => (
+              <Link key={term.id} href={`/terms/${term.id}`} className="feature-card">
+                <span
+                  className="text-[10px] font-medium uppercase tracking-widest"
+                  style={{ fontFamily: "var(--font-sans)", color: "var(--color-gold)" }}
+                >
+                  {term.term[0].toUpperCase()}
+                </span>
+                <h3
+                  className="text-lg font-medium leading-tight italic"
+                  style={{ fontFamily: "var(--font-serif)", color: "var(--color-ink)" }}
+                >
+                  {term.term}
+                </h3>
+                <p
+                  className="text-sm leading-relaxed line-clamp-3"
+                  style={{ fontFamily: "var(--font-serif)", color: "var(--color-ink-muted)" }}
+                >
+                  {term.shortDefinition}
+                </p>
+                <span
+                  className="mt-auto text-xs"
+                  style={{ fontFamily: "var(--font-sans)", color: "var(--color-gold)" }}
+                >
+                  Read more →
+                </span>
+              </Link>
+            ))}
+          </div>
+        </section>
+      )}
+    </div>
+  );
+}
