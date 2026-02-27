@@ -9,13 +9,13 @@ export function TermCard({ term }: Props) {
   return (
     <Link href={`/terms/${term.id}`} className="term-card-link group">
       <div className="flex-1 min-w-0">
-        <div className="flex items-baseline justify-between gap-3 mb-1.5">
+        <div className="flex items-baseline justify-between gap-3 mb-2">
           <h3
-            className="font-medium italic leading-snug"
+            className="font-semibold leading-snug"
             style={{
               fontFamily: "var(--font-serif)",
               color: "var(--color-ink)",
-              fontSize: "1.0625rem",
+              fontSize: "1.125rem",
             }}
           >
             {term.term}
@@ -32,7 +32,8 @@ export function TermCard({ term }: Props) {
           style={{
             fontFamily: "var(--font-serif)",
             color: "var(--color-ink-muted)",
-            fontSize: "0.9125rem",
+            fontSize: "0.9375rem",
+            lineHeight: "1.65",
           }}
         >
           {term.shortDefinition}

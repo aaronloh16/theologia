@@ -8,8 +8,8 @@ import { getAllTerms } from "@/lib/terms";
 const garamond = EB_Garamond({
   variable: "--font-garamond",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
-  style: ["normal", "italic"],
+  weight: ["400", "500", "600"],
+  style: ["normal"],
   display: "swap",
 });
 

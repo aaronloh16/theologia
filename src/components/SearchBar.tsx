@@ -102,11 +102,12 @@ export function SearchBar({ terms, placeholder = "Search 498 terms…", classNam
   return (
     <div ref={containerRef} className={`relative ${className}`}>
       <div
-        className="flex items-center gap-2 px-3 rounded-lg border transition-all duration-150"
+        className="flex items-center gap-2.5 px-4 rounded-xl border transition-all duration-150"
         style={{
           background: "var(--color-surface)",
           borderColor: open ? "var(--color-gold)" : "var(--color-border)",
-          boxShadow: open ? "0 0 0 3px color-mix(in srgb, var(--color-gold) 15%, transparent)" : "none",
+          boxShadow: open ? "0 0 0 3px color-mix(in srgb, var(--color-gold) 12%, transparent)" : "var(--shadow-card)",
+          height: "2.75rem",
         }}
       >
         {/* Search icon */}
@@ -133,10 +134,11 @@ export function SearchBar({ terms, placeholder = "Search 498 terms…", classNam
           onKeyDown={handleKeyDown}
           onFocus={() => query.length >= 2 && results.length > 0 && setOpen(true)}
           placeholder={placeholder}
-          className="flex-1 py-2.5 bg-transparent outline-none text-sm min-w-0"
+          className="flex-1 bg-transparent outline-none min-w-0"
           style={{
             fontFamily: "var(--font-sans)",
             color: "var(--color-ink)",
+            fontSize: "0.9375rem",
           }}
           autoComplete="off"
           spellCheck={false}
@@ -180,7 +182,7 @@ export function SearchBar({ terms, placeholder = "Search 498 terms…", classNam
               <Link
                 href={`/terms/${term.id}`}
                 onClick={close}
-                className="flex flex-col gap-0.5 px-4 py-3 transition-colors duration-100"
+                className="flex flex-col gap-1 px-5 py-3.5 transition-colors duration-100"
                 style={{
                   background:
                     i === active ? "var(--color-highlight)" : "transparent",
@@ -189,8 +191,8 @@ export function SearchBar({ terms, placeholder = "Search 498 terms…", classNam
                 onMouseEnter={() => setActive(i)}
               >
                 <span
-                  className="text-sm font-medium"
-                  style={{ fontFamily: "var(--font-serif)", color: "var(--color-ink)" }}
+                  className="font-semibold"
+                  style={{ fontFamily: "var(--font-serif)", color: "var(--color-ink)", fontSize: "0.9375rem" }}
                 >
                   {term.term}
                 </span>

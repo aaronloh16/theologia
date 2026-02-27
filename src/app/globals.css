@@ -10,16 +10,16 @@
   --font-sans: var(--font-inter), system-ui, -apple-system, sans-serif;
 
   /* Light palette — warm parchment */
-  --color-bg:        #F8F5EE;
-  --color-surface:   #FDFAF5;
-  --color-ink:       #1E1B14;
-  --color-ink-muted: #6B5C48;
-  --color-ink-faint: #A8998A;
-  --color-gold:      #8C6D2F;
-  --color-gold-soft: #B8921E;
-  --color-border:    #E0D4C0;
-  --color-border-soft: #EDE6D6;
-  --color-highlight: #FDF4E0;
+  --color-bg:        #FAF8F3;
+  --color-surface:   #FFFFFF;
+  --color-ink:       #1A1816;
+  --color-ink-muted: #5A5450;
+  --color-ink-faint: #9B9490;
+  --color-gold:      #996B2F;
+  --color-gold-soft: #B8851E;
+  --color-border:    #E5E0D8;
+  --color-border-soft: #F0EDE8;
+  --color-highlight: #FFF9ED;
   --color-highlight-border: #D4A84B;
 
   /* Shadows */
@@ -30,21 +30,21 @@
 
 /* ─── Dark mode overrides ─────────────────────────────────────────────────── */
 .dark {
-  --color-bg:        #131108;
-  --color-surface:   #1B1910;
-  --color-ink:       #EDE9DC;
-  --color-ink-muted: #A89A80;
-  --color-ink-faint: #655C48;
-  --color-gold:      #C8A050;
-  --color-gold-soft: #E0B860;
-  --color-border:    #2E2A1E;
-  --color-border-soft: #252115;
-  --color-highlight: #1E1A0C;
-  --color-highlight-border: #8C6D2F;
+  --color-bg:        #0F0F0F;
+  --color-surface:   #1A1A1A;
+  --color-ink:       #F5F5F5;
+  --color-ink-muted: #B8B8B8;
+  --color-ink-faint: #6B6B6B;
+  --color-gold:      #D4A574;
+  --color-gold-soft: #E8C9A0;
+  --color-border:    #2A2A2A;
+  --color-border-soft: #222222;
+  --color-highlight: #1F1F1F;
+  --color-highlight-border: #B8935F;
 
-  --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.25), 0 1px 2px rgba(0, 0, 0, 0.15);
-  --shadow-card-hover: 0 4px 16px rgba(0, 0, 0, 0.35), 0 2px 4px rgba(0, 0, 0, 0.20);
-  --shadow-dropdown: 0 8px 32px rgba(0, 0, 0, 0.40), 0 2px 8px rgba(0, 0, 0, 0.25);
+  --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px 2px rgba(0, 0, 0, 0.2);
+  --shadow-card-hover: 0 4px 16px rgba(0, 0, 0, 0.4), 0 2px 4px rgba(0, 0, 0, 0.25);
+  --shadow-dropdown: 0 8px 32px rgba(0, 0, 0, 0.5), 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
 /* ─── Base styles ─────────────────────────────────────────────────────────── */
@@ -178,30 +178,32 @@
     gap: 1rem;
     border-radius: 0.75rem;
     border: 1px solid var(--color-border);
-    padding: 1rem 1.25rem;
+    padding: 1.125rem 1.5rem;
     background: var(--color-surface);
-    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.1s ease;
   }
   .term-card-link:hover {
-    border-color: var(--color-ink-faint);
-    box-shadow: var(--shadow-card);
+    border-color: var(--color-gold);
+    box-shadow: var(--shadow-card-hover);
+    transform: translateY(-1px);
   }
 
   /* See-also pill */
   .see-also-pill {
-    border-radius: 9999px;
-    padding: 0.25rem 0.75rem;
+    border-radius: 0.5rem;
+    padding: 0.5rem 1rem;
     font-size: 0.875rem;
-    font-style: italic;
+    font-weight: 500;
     border: 1px solid var(--color-border);
-    color: var(--color-ink-muted);
+    color: var(--color-ink);
     background: var(--color-surface);
-    transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+    transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease, transform 0.1s ease;
   }
   .see-also-pill:hover {
     color: var(--color-gold);
     border-color: var(--color-gold);
     background: var(--color-highlight);
+    transform: translateY(-1px);
   }
 
   /* Prev/next card */
@@ -245,14 +247,15 @@
   .def-link {
     color: var(--color-gold);
     text-decoration: underline;
-    text-decoration-style: dotted;
-    text-decoration-thickness: 1px;
-    text-underline-offset: 2px;
+    text-decoration-style: solid;
+    text-decoration-thickness: 1.5px;
+    text-underline-offset: 3px;
     transition: color 0.15s ease, text-decoration-color 0.15s ease;
+    font-weight: 500;
   }
   .def-link:hover {
     color: var(--color-gold-soft);
-    text-decoration-style: solid;
+    text-decoration-thickness: 2px;
   }
 
   /* Glass-morphism card surface */

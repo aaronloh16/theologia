@@ -7,7 +7,7 @@ export default function HomePage() {
   const letters = getLetters();
 
   const featured = [
-    terms.find((t) => t.id === "grace-common-efficacious-prevenient"),
+    terms.find((t) => t.id === "grace-conunon-efficacious-prevenient"),
     terms.find((t) => t.id === "incarnation"),
     terms.find((t) => t.id === "eschaton-eschatology"),
   ].filter(Boolean) as (typeof terms)[0][];
@@ -45,11 +45,10 @@ export default function HomePage() {
           style={{
             fontFamily: "var(--font-serif)",
             color: "var(--color-ink-muted)",
-            fontWeight: 400,
-            fontStyle: "italic",
+            fontWeight: 500,
           }}
         >
-          of theological terms
+          Theological Dictionary
         </p>
 
         <p
@@ -125,7 +124,7 @@ export default function HomePage() {
                   {term.term[0].toUpperCase()}
                 </span>
                 <h3
-                  className="text-lg font-medium leading-tight italic"
+                  className="text-lg font-semibold leading-tight"
                   style={{ fontFamily: "var(--font-serif)", color: "var(--color-ink)" }}
                 >
                   {term.term}

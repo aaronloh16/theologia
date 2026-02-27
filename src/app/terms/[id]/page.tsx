@@ -81,11 +81,11 @@ export default async function TermPage({ params }: Props) {
 
       {/* Heading */}
       <h1
-        className="mb-2 leading-tight italic"
+        className="mb-2 leading-tight"
         style={{
           fontFamily: "var(--font-serif)",
           color: "var(--color-ink)",
-          fontWeight: 500,
+          fontWeight: 600,
           fontSize: "clamp(2rem, 6vw, 3rem)",
         }}
       >
@@ -96,25 +96,31 @@ export default async function TermPage({ params }: Props) {
 
       {/* Short definition callout */}
       <blockquote
-        className="mb-8 rounded-lg px-5 py-4"
+        className="mb-8 rounded-xl px-6 py-5"
         style={{
           background: "var(--color-highlight)",
-          borderLeft: "3px solid var(--color-gold)",
+          borderLeft: "4px solid var(--color-gold)",
         }}
       >
         <p
-          className="text-lg leading-relaxed italic"
-          style={{ fontFamily: "var(--font-serif)", color: "var(--color-ink)", fontWeight: 400 }}
+          className="text-[1.0625rem] leading-[1.75]"
+          style={{ fontFamily: "var(--font-serif)", color: "var(--color-ink)", fontWeight: 500 }}
         >
           {term.shortDefinition}
         </p>
       </blockquote>
 
       {/* Full definition */}
-      <div className="mb-10">
+      <div className="mb-12">
         <p
-          className="text-base sm:text-lg leading-[1.85]"
-          style={{ fontFamily: "var(--font-serif)", color: "var(--color-ink-muted)" }}
+          className="leading-[1.8]"
+          style={{
+            fontFamily: "var(--font-serif)",
+            color: "var(--color-ink)",
+            fontSize: "1.0625rem",
+            fontWeight: 400,
+            letterSpacing: "0.01em",
+          }}
         >
           <LinkedDefinition text={term.fullDefinition} />
         </p>
@@ -122,14 +128,14 @@ export default async function TermPage({ params }: Props) {
 
       {/* See Also */}
       {resolvedSeeAlso.length > 0 && (
-        <div className="mb-10">
+        <div className="mb-12">
           <p
-            className="mb-3 text-[10px] font-medium uppercase tracking-[0.18em]"
+            className="mb-4 text-[10px] font-medium uppercase tracking-[0.18em]"
             style={{ fontFamily: "var(--font-sans)", color: "var(--color-ink-faint)" }}
           >
-            See also
+            Related concepts
           </p>
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap gap-2.5">
             {resolvedSeeAlso.map(({ ref, id: refId, term: refTerm }) =>
               refId && refTerm ? (
                 <Link key={ref} href={`/terms/${refId}`} className="see-also-pill" style={{ fontFamily: "var(--font-serif)" }}>
@@ -178,7 +184,7 @@ export default async function TermPage({ params }: Props) {
             <span className="text-[10px] uppercase tracking-wider" style={{ fontFamily: "var(--font-sans)", color: "var(--color-ink-faint)" }}>
               ← Previous
             </span>
-            <span className="text-sm font-medium italic leading-snug" style={{ fontFamily: "var(--font-serif)", color: "var(--color-ink)" }}>
+            <span className="text-sm font-semibold leading-snug" style={{ fontFamily: "var(--font-serif)", color: "var(--color-ink)" }}>
               {prev.term}
             </span>
           </Link>
@@ -189,7 +195,7 @@ export default async function TermPage({ params }: Props) {
             <span className="text-[10px] uppercase tracking-wider" style={{ fontFamily: "var(--font-sans)", color: "var(--color-ink-faint)" }}>
               Next →
             </span>
-            <span className="text-sm font-medium italic leading-snug" style={{ fontFamily: "var(--font-serif)", color: "var(--color-ink)" }}>
+            <span className="text-sm font-semibold leading-snug" style={{ fontFamily: "var(--font-serif)", color: "var(--color-ink)" }}>
               {next.term}
             </span>
           </Link>
