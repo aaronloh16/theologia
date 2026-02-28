@@ -9,6 +9,7 @@ import {
 } from "@/lib/terms";
 import { LinkedDefinition } from "@/components/LinkedDefinition";
 import { CopyLinkButton } from "@/components/CopyLinkButton";
+import { SaveButton } from "@/components/SaveButton";
 
 type Props = {
   params: Promise<{ id: string }>;
@@ -79,18 +80,23 @@ export default async function TermPage({ params }: Props) {
         {term.term[0].toUpperCase()}
       </span>
 
-      {/* Heading */}
-      <h1
-        className="mb-2 leading-tight"
-        style={{
-          fontFamily: "var(--font-serif)",
-          color: "var(--color-ink)",
-          fontWeight: 600,
-          fontSize: "clamp(2rem, 6vw, 3rem)",
-        }}
-      >
-        {term.term}
-      </h1>
+      {/* Heading + Save */}
+      <div className="flex items-start justify-between gap-4">
+        <h1
+          className="mb-2 leading-tight"
+          style={{
+            fontFamily: "var(--font-serif)",
+            color: "var(--color-ink)",
+            fontWeight: 600,
+            fontSize: "clamp(2rem, 6vw, 3rem)",
+          }}
+        >
+          {term.term}
+        </h1>
+        <div className="shrink-0 mt-2">
+          <SaveButton termId={term.id} size="md" />
+        </div>
+      </div>
 
       <div className="mt-6 mb-8 h-px w-12" style={{ background: "var(--color-gold)", opacity: 0.5 }} />
 

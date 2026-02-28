@@ -140,11 +140,39 @@ theologia/
 
 ---
 
-## Future ideas (post-MVP)
+## Study Features (v2)
+
+### Save terms (bookmarks)
+- Heart/bookmark button on every term card and term detail page
+- Saved terms stored in localStorage (no account needed)
+- `/saved` page showing all saved terms in a clean list
+- Count badge in header showing how many terms are saved
+- One-click "clear all" option
+
+### Flashcard mode
+- `/flashcards` page — study your saved terms as flip cards
+- Card shows the **term** on the front, click/tap to flip and reveal the **short definition**
+- Navigation: Previous / Next / Shuffle
+- Progress bar: "Card 3 of 12"
+- Keyboard shortcuts: Space to flip, arrow keys to navigate
+- "I know this" / "Still learning" buttons to track confidence
+- Session stats: how many you marked as known vs still learning
+- Option to study all terms or only saved terms
+
+### Routes
+
+| Route | Description |
+|-------|-------------|
+| `/saved` | All bookmarked terms |
+| `/flashcards` | Flashcard study mode |
+
+---
+
+## Future ideas (post-v2)
 
 - **Daily term** — highlight a term of the day on the landing page
-- **Flashcard mode** — show term, reveal definition (study tool)
 - **Tags / categories** — group terms by doctrine area (Christology, Soteriology, etc.)
 - **Scripture index** — link terms to Bible references mentioned in definitions
-- **Bookmarks** — save terms to a personal list (localStorage)
+- **Spaced repetition** — resurface "still learning" cards more often
 - **Print stylesheet** — clean printable version of the full dictionary
+- **Quiz mode** — multiple choice from definitions

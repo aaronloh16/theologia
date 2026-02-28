@@ -72,6 +72,14 @@ export default function HomePage() {
           </Link>
           <span style={{ color: "var(--color-border)" }}>·</span>
           <Link
+            href="/flashcards"
+            className="text-sm font-medium link-gold"
+            style={{ fontFamily: "var(--font-sans)" }}
+          >
+            Flashcards
+          </Link>
+          <span style={{ color: "var(--color-border)" }}>·</span>
+          <Link
             href="/random"
             className="text-sm transition-colors duration-150"
             style={{ fontFamily: "var(--font-sans)", color: "var(--color-ink-muted)" }}

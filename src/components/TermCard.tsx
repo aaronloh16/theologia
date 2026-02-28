@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { Term } from "@/lib/terms";
+import { SaveButton } from "./SaveButton";
 
 type Props = {
   term: Term;
@@ -7,8 +8,8 @@ type Props = {
 
 export function TermCard({ term }: Props) {
   return (
-    <Link href={`/terms/${term.id}`} className="term-card-link group">
-      <div className="flex-1 min-w-0">
+    <div className="term-card-link group relative">
+      <Link href={`/terms/${term.id}`} className="flex-1 min-w-0 no-underline">
         <div className="flex items-baseline justify-between gap-3 mb-2">
           <h3
             className="font-semibold leading-snug"
@@ -46,7 +47,10 @@ export function TermCard({ term }: Props) {
             See also: {term.seeAlso.slice(0, 3).join(", ")}
           </p>
         )}
+      </Link>
+      <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity duration-150">
+        <SaveButton termId={term.id} size="sm" />
       </div>
-    </Link>
+    </div>
   );
 }

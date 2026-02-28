@@ -2,6 +2,8 @@
 
 A theological dictionary web app with 498 terms from the *Pocket Dictionary of Theological Terms* by Grenz, Guretzki & Nordling.
 
+Built to help my brother study for his theology courses.
+
 Built with Next.js 16, TypeScript, and Tailwind CSS v4.
 
 ## Features

@@ -222,6 +222,25 @@
   }
 }
 
+/* ─── Flashcard ───────────────────────────────────────────────────────────── */
+@layer components {
+  .flashcard-container {
+    perspective: 1200px;
+  }
+  .flashcard-inner {
+    position: relative;
+    min-height: 20rem;
+    transform-style: preserve-3d;
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .flashcard-face {
+    position: absolute;
+    inset: 0;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+  }
+}
+
 /* ─── Utility classes ─────────────────────────────────────────────────────── */
 @layer utilities {
   .text-balance {
