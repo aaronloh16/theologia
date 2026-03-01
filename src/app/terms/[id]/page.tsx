@@ -48,7 +48,7 @@ export default async function TermPage({ params }: Props) {
   const prev = currentIndex > 0 ? allTerms[currentIndex - 1] : null;
   const next = currentIndex < allTerms.length - 1 ? allTerms[currentIndex + 1] : null;
 
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://theologia.vercel.app";
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://studytheologia.vercel.app";
   const termUrl = `${siteUrl}/terms/${term.id}`;
 
   const resolvedSeeAlso = term.seeAlso

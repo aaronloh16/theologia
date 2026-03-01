@@ -19,7 +19,10 @@ const inter = Inter({
   display: "swap",
 });
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://studytheologia.vercel.app";
+
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
   title: {
     default: "Theologia — Theological Dictionary",
     template: "%s · Theologia",
@@ -32,11 +35,13 @@ export const metadata: Metadata = {
       "498 theological terms, clearly defined. From a posteriori to Zwingli.",
     type: "website",
     locale: "en_US",
+    images: [{ url: "/opengraph.png", width: 1200, height: 630 }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Theologia — Theological Dictionary",
     description: "498 theological terms, clearly defined.",
+    images: ["/opengraph.png"],
   },
 };
 
