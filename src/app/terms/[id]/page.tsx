@@ -10,6 +10,7 @@ import {
 import { LinkedDefinition } from "@/components/LinkedDefinition";
 import { CopyLinkButton } from "@/components/CopyLinkButton";
 import { SaveButton } from "@/components/SaveButton";
+import { CustomTermViewer } from "@/components/CustomTermViewer";
 
 type Props = {
   params: Promise<{ id: string }>;
@@ -35,6 +36,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function TermPage({ params }: Props) {
   const { id } = await params;
+  // Custom terms are client-only (localStorage)
+  if (id.startsWith("custom-")) {
+    return <CustomTermViewer id={id} />;
+  }
   const term = getTermById(id);
   if (!term) notFound();
 

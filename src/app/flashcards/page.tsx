@@ -4,9 +4,9 @@ import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import { getSavedIds } from "@/lib/saved";
 import { getAllTerms, type Term } from "@/lib/terms";
+import { getCustomTerms } from "@/lib/customTerms";
 
-const allTerms = getAllTerms();
-const termsById = new Map(allTerms.map((t) => [t.id, t]));
+const staticTerms = getAllTerms();
 
 function shuffle<T>(arr: T[]): T[] {
   const a = [...arr];
@@ -31,12 +31,14 @@ export default function FlashcardsPage() {
 
   const loadDeck = useCallback(
     (m: StudyMode) => {
+      const custom = getCustomTerms();
+      const termsById = new Map([...staticTerms, ...custom].map((t) => [t.id, t]));
       let terms: Term[];
       if (m === "saved") {
         const ids = getSavedIds();
         terms = ids.map((id) => termsById.get(id)).filter(Boolean) as Term[];
       } else {
-        terms = [...allTerms];
+        terms = [...staticTerms, ...custom];
       }
       setDeck(shuffle(terms));
       setIndex(0);
@@ -206,7 +208,7 @@ export default function FlashcardsPage() {
             </div>
             <div>
               <p className="font-semibold mb-1" style={{ fontFamily: "var(--font-serif)", color: "var(--color-ink)", fontSize: "1.0625rem" }}>
-                All {allTerms.length} terms
+                All {staticTerms.length + getCustomTerms().length} terms
               </p>
               <p className="text-sm" style={{ fontFamily: "var(--font-sans)", color: "var(--color-ink-muted)" }}>
                 Full dictionary, shuffled randomly

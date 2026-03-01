@@ -159,10 +159,20 @@ theologia/
 - Session stats: how many you marked as known vs still learning
 - Option to study all terms or only saved terms
 
+### Custom terms
+
+- **Add your own** — `/add` page with a clean form: Term, Short definition (required), Full definition (optional)
+- Stored in localStorage (no account needed)
+- Auto-saved to study list when created
+- Searchable, appear in flashcards (saved + all modes)
+- Edit and Delete on the term detail page
+- "Your term" badge to distinguish from dictionary entries
+
 ### Routes
 
 | Route | Description |
 |-------|-------------|
+| `/add` | Add a custom term |
 | `/saved` | All bookmarked terms |
 | `/flashcards` | Flashcard study mode |
 

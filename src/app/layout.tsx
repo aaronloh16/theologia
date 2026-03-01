@@ -62,11 +62,19 @@ export default function RootLayout({
           <main className="flex-1">{children}</main>
           <footer className="border-t py-8 text-center text-sm" style={{ borderColor: "var(--color-border)", color: "var(--color-ink-faint)", fontFamily: "var(--font-sans)" }}>
             <p>
-              Based on{" "}
-              <em style={{ fontFamily: "var(--font-serif)" }}>
-                Pocket Dictionary of Theological Terms
-              </em>{" "}
-              by Grenz, Guretzki &amp; Nordling.
+              Definitions from <em style={{ fontFamily: "var(--font-serif)" }}>Pocket Dictionary of Theological Terms</em> by Grenz, Guretzki &amp; Nordling.
+            </p>
+            <p className="mt-4" style={{ fontSize: "0.625rem", opacity: 0.55 }}>
+              <a
+                href="https://github.com/aaronloh16/theologia"
+                target="_blank"
+                rel="noopener noreferrer"
+                title="Star on GitHub if helpful"
+                className="hover:underline"
+                style={{ color: "inherit" }}
+              >
+                by Aaron Loh ⭐
+              </a>
             </p>
           </footer>
         </div>

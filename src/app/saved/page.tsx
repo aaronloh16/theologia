@@ -4,10 +4,8 @@ import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import { getSavedIds, clearAllSaved } from "@/lib/saved";
 import { getAllTerms, type Term } from "@/lib/terms";
+import { getCustomTerms } from "@/lib/customTerms";
 import { TermCard } from "@/components/TermCard";
-
-const allTerms = getAllTerms();
-const termsById = new Map(allTerms.map((t) => [t.id, t]));
 
 export default function SavedPage() {
   const [savedTerms, setSavedTerms] = useState<Term[]>([]);
@@ -15,6 +13,9 @@ export default function SavedPage() {
 
   const sync = useCallback(() => {
     const ids = getSavedIds();
+    const staticTerms = getAllTerms();
+    const customTerms = getCustomTerms();
+    const termsById = new Map([...staticTerms, ...customTerms].map((t) => [t.id, t]));
     const terms = ids.map((id) => termsById.get(id)).filter(Boolean) as Term[];
     setSavedTerms(terms);
   }, []);
@@ -24,7 +25,11 @@ export default function SavedPage() {
     sync();
     const handler = () => sync();
     window.addEventListener("theologia-saved-change", handler);
-    return () => window.removeEventListener("theologia-saved-change", handler);
+    window.addEventListener("theologia-custom-terms-change", handler);
+    return () => {
+      window.removeEventListener("theologia-saved-change", handler);
+      window.removeEventListener("theologia-custom-terms-change", handler);
+    };
   }, [sync]);
 
   function handleClearAll() {
@@ -84,30 +89,48 @@ export default function SavedPage() {
             No saved terms yet
           </p>
           <p
-            className="mb-8 text-sm max-w-sm mx-auto"
+            className="mb-6 text-sm max-w-sm mx-auto"
             style={{ fontFamily: "var(--font-sans)", color: "var(--color-ink-faint)", lineHeight: 1.6 }}
           >
-            Browse terms and tap the bookmark icon to save them here for studying.
+            Browse terms and tap the bookmark icon to save them here, or add your own from lectures and readings.
           </p>
-          <Link
-            href="/terms"
-            className="inline-flex items-center gap-2 rounded-lg px-5 py-2.5 text-sm font-medium transition-colors"
-            style={{
-              fontFamily: "var(--font-sans)",
-              background: "var(--color-gold)",
-              color: "var(--color-bg)",
-            }}
-          >
-            Browse all terms
-          </Link>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
+            <Link
+              href="/terms"
+              className="inline-flex items-center gap-2 rounded-lg px-5 py-2.5 text-sm font-medium transition-colors"
+              style={{
+                fontFamily: "var(--font-sans)",
+                background: "var(--color-gold)",
+                color: "var(--color-bg)",
+              }}
+            >
+              Browse all terms
+            </Link>
+            <Link
+              href="/add"
+              className="inline-flex items-center gap-2 rounded-lg px-5 py-2.5 text-sm font-medium border transition-colors"
+              style={{
+                fontFamily: "var(--font-sans)",
+                borderColor: "var(--color-border)",
+                color: "var(--color-ink)",
+              }}
+            >
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <line x1="12" y1="5" x2="12" y2="19" />
+                <line x1="5" y1="12" x2="19" y2="12" />
+              </svg>
+              Add your own
+            </Link>
+          </div>
         </div>
       ) : (
         <>
           {/* Actions bar */}
           <div
-            className="flex items-center justify-between mb-6 pb-4 border-b"
+            className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6 pb-4 border-b"
             style={{ borderColor: "var(--color-border)" }}
           >
+            <div className="flex items-center gap-3">
             <Link
               href="/flashcards"
               className="inline-flex items-center gap-2 rounded-lg px-5 py-2.5 text-sm font-medium transition-all duration-150"
@@ -124,6 +147,22 @@ export default function SavedPage() {
               </svg>
               Study as flashcards
             </Link>
+            <Link
+              href="/add"
+              className="inline-flex items-center gap-2 rounded-lg px-4 py-2.5 text-sm font-medium border transition-colors"
+              style={{
+                fontFamily: "var(--font-sans)",
+                borderColor: "var(--color-border)",
+                color: "var(--color-ink)",
+              }}
+            >
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <line x1="12" y1="5" x2="12" y2="19" />
+                <line x1="5" y1="12" x2="19" y2="12" />
+              </svg>
+              Add term
+            </Link>
+            </div>
             <button
               onClick={handleClearAll}
               className="text-xs transition-colors duration-150"

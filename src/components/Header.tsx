@@ -40,6 +40,13 @@ export function Header({ terms }: Props) {
           <Link href="/terms" className="nav-pill hidden sm:inline-flex" style={{ fontFamily: "var(--font-sans)" }}>
             A–Z
           </Link>
+          <Link href="/add" className="nav-pill hidden sm:inline-flex items-center gap-1" style={{ fontFamily: "var(--font-sans)" }} title="Add your own term">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <line x1="12" y1="5" x2="12" y2="19" />
+              <line x1="5" y1="12" x2="19" y2="12" />
+            </svg>
+            Add
+          </Link>
           <Link href="/flashcards" className="nav-pill hidden sm:inline-flex" style={{ fontFamily: "var(--font-sans)" }}>
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" className="mr-1">
               <rect x="2" y="4" width="20" height="16" rx="2" />

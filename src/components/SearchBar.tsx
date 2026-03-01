@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import Fuse from "fuse.js";
 import type { Term } from "@/lib/terms";
+import { getCustomTerms } from "@/lib/customTerms";
 
 type Props = {
   terms: Term[];
@@ -12,27 +13,40 @@ type Props = {
   className?: string;
 };
 
-export function SearchBar({ terms, placeholder = "Search 498 terms…", className = "" }: Props) {
+export function SearchBar({ terms, placeholder = "Search terms…", className = "" }: Props) {
   const [query, setQuery] = useState("");
   const [results, setResults] = useState<Term[]>([]);
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState(-1);
+  const [customTerms, setCustomTerms] = useState<Term[]>([]);
   const inputRef = useRef<HTMLInputElement>(null);
   const listRef = useRef<HTMLUListElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
 
-  const fuse = useRef(
-    new Fuse(terms, {
-      keys: [
-        { name: "term", weight: 3 },
-        { name: "shortDefinition", weight: 1 },
-      ],
+  const allTerms = [...terms, ...customTerms];
+  const fuse = useRef(new Fuse(terms, {
+    keys: [{ name: "term", weight: 3 }, { name: "shortDefinition", weight: 1 }],
+    threshold: 0.35,
+    includeScore: true,
+    minMatchCharLength: 2,
+  }));
+
+  useEffect(() => {
+    setCustomTerms(getCustomTerms());
+    const handler = () => setCustomTerms(getCustomTerms());
+    window.addEventListener("theologia-custom-terms-change", handler);
+    return () => window.removeEventListener("theologia-custom-terms-change", handler);
+  }, []);
+
+  useEffect(() => {
+    fuse.current = new Fuse(allTerms, {
+      keys: [{ name: "term", weight: 3 }, { name: "shortDefinition", weight: 1 }],
       threshold: 0.35,
       includeScore: true,
       minMatchCharLength: 2,
-    })
-  );
+    });
+  }, [terms, customTerms]);
 
   const search = useCallback(
     (q: string) => {

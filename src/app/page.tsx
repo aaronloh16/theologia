@@ -62,7 +62,7 @@ export default function HomePage() {
           <SearchBar terms={terms} placeholder="Search theological terms…" />
         </div>
 
-        <div className="mt-6 flex items-center gap-5">
+        <div className="mt-6 flex flex-wrap items-center justify-center gap-x-5 gap-y-1">
           <Link
             href="/terms"
             className="text-sm font-medium link-gold"
@@ -77,6 +77,14 @@ export default function HomePage() {
             style={{ fontFamily: "var(--font-sans)" }}
           >
             Flashcards
+          </Link>
+          <span style={{ color: "var(--color-border)" }}>·</span>
+          <Link
+            href="/add"
+            className="text-sm font-medium link-gold"
+            style={{ fontFamily: "var(--font-sans)" }}
+          >
+            Add your own
           </Link>
           <span style={{ color: "var(--color-border)" }}>·</span>
           <Link
