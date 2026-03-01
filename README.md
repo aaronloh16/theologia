@@ -1,6 +1,7 @@
 # Theologia
+<img width="936" height="594" alt="Screenshot 2026-03-01 at 5 18 19 PM" src="https://github.com/user-attachments/assets/30fd83e2-4524-4436-8ffd-e2fb96e4cc0d" />
 
-A theological dictionary web app built for Redeemer University students. 498 terms from the *Pocket Dictionary of Theological Terms* by Grenz, Guretzki & Nordling.
+A theological dictionary web app built for Redeemer University students. includes all 499 terms from the *Pocket Dictionary of Theological Terms* by Grenz, Guretzki & Nordling.
 
 ## Features
 
