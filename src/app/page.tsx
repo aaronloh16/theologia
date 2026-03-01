@@ -2,15 +2,17 @@ import Link from "next/link";
 import { getAllTerms, getLetters } from "@/lib/terms";
 import { SearchBar } from "@/components/SearchBar";
 
+export const dynamic = "force-dynamic";
+
+function pickRandom<T>(arr: T[], n: number): T[] {
+  const shuffled = [...arr].sort(() => Math.random() - 0.5);
+  return shuffled.slice(0, n);
+}
+
 export default function HomePage() {
   const terms = getAllTerms();
   const letters = getLetters();
-
-  const featured = [
-    terms.find((t) => t.id === "grace-conunon-efficacious-prevenient"),
-    terms.find((t) => t.id === "incarnation"),
-    terms.find((t) => t.id === "eschaton-eschatology"),
-  ].filter(Boolean) as (typeof terms)[0][];
+  const featured = pickRandom(terms, 3);
 
   return (
     <div>
@@ -101,19 +103,28 @@ export default function HomePage() {
 
       {/* ── Alphabet Nav ───────────────────────────────────────────── */}
       <section
-        className="border-y py-7 px-4"
+        className="border-y py-5 px-4"
         style={{ borderColor: "var(--color-border)", background: "var(--color-surface)" }}
       >
-        <div className="mx-auto max-w-3xl">
-          <p
-            className="mb-4 text-center text-[10px] font-medium uppercase tracking-[0.2em]"
+        <div className="mx-auto max-w-2xl flex flex-col sm:flex-row sm:items-center sm:justify-center gap-3 sm:gap-5">
+          <span
+            className="text-[10px] font-medium uppercase tracking-[0.2em] text-center sm:text-left shrink-0"
             style={{ fontFamily: "var(--font-sans)", color: "var(--color-ink-faint)" }}
           >
-            Browse by letter
-          </p>
-          <div className="flex flex-wrap justify-center gap-1.5">
+            Jump to letter
+          </span>
+          <div className="flex flex-wrap justify-center gap-1">
             {letters.map((letter) => (
-              <Link key={letter} href={`/terms#${letter}`} className="letter-btn" style={{ fontFamily: "var(--font-sans)" }}>
+              <Link
+                key={letter}
+                href={`/terms#${letter}`}
+                className="flex h-7 w-7 items-center justify-center rounded text-xs font-medium transition-colors hover:bg-[var(--color-gold)] hover:text-[var(--color-surface)] hover:border-[var(--color-gold)]"
+                style={{
+                  fontFamily: "var(--font-sans)",
+                  color: "var(--color-ink-muted)",
+                  border: "1px solid var(--color-border)",
+                }}
+              >
                 {letter}
               </Link>
             ))}

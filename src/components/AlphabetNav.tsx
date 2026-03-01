@@ -15,7 +15,7 @@ export function AlphabetNav({ letters }: Props) {
     const observers: IntersectionObserver[] = [];
 
     letters.forEach((letter) => {
-      const el = document.getElementById(`section-${letter}`);
+      const el = document.getElementById(letter);
       if (!el) return;
       const obs = new IntersectionObserver(
         ([entry]) => {
@@ -31,7 +31,7 @@ export function AlphabetNav({ letters }: Props) {
   }, [letters]);
 
   function scrollTo(letter: string) {
-    const el = document.getElementById(`section-${letter}`);
+    const el = document.getElementById(letter);
     if (el) {
       const y = el.getBoundingClientRect().top + window.scrollY - 120;
       window.scrollTo({ top: y, behavior: "smooth" });

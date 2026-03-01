@@ -1,6 +1,7 @@
 import { getTermsGroupedByLetter, getLetters, getAllTerms } from "@/lib/terms";
 import { AlphabetNav } from "@/components/AlphabetNav";
 import { TermCard } from "@/components/TermCard";
+import { HashScroll } from "@/components/HashScroll";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -15,6 +16,7 @@ export default function TermsIndexPage() {
 
   return (
     <div>
+      <HashScroll />
       <AlphabetNav letters={letters} />
 
       <div className="mx-auto max-w-3xl px-4 pb-20 sm:px-6">
@@ -44,7 +46,7 @@ export default function TermsIndexPage() {
         {letters.map((letter) => {
           const sectionTerms = groups[letter] || [];
           return (
-            <section key={letter} id={`section-${letter}`} className="mb-12">
+            <section key={letter} id={letter} className="mb-12 scroll-mt-24">
               {/* Letter heading */}
               <div
                 className="sticky flex items-center gap-4 py-4 mb-5"
